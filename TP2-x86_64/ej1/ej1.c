@@ -1,15 +1,58 @@
 #include "ej1.h"
 
 string_proc_list* string_proc_list_create(void){
+	string_proc_list* list = (string_proc_list*)malloc(sizeof(string_proc_list));
+	if(list == NULL){
+		fprintf(stderr, "Error: No se pudo crear la lista\n");
+		return NULL;
+	}
+	list->first = NULL;
+	list->last  = NULL;
+	return list;
 }
 
 string_proc_node* string_proc_node_create(uint8_t type, char* hash){
+	string_proc_node* node = (string_proc_node*)malloc(sizeof(string_proc_node));
+	if(node == NULL){
+		fprintf(stderr, "Error: No se pudo crear el nodo\n");
+		return NULL;
+	}
+	node->next      = NULL;
+	node->previous  = NULL;
+	node->type      = type;			
+	node->hash      = hash;	
+	return node;
 }
 
 void string_proc_list_add_node(string_proc_list* list, uint8_t type, char* hash){
+	string_proc_node* node = string_proc_node_create(type, hash);
+	if(node == NULL){
+		fprintf(stderr, "Error: No se pudo crear el nodo\n");
+		return;
+	}
+	if(list->first == NULL){
+		list->first = node;
+		list->last  = node;
+	}else{
+		node->previous = list->last;
+		list->last->next = node;
+		list->last = node;
+	}
 }
 
 char* string_proc_list_concat(string_proc_list* list, uint8_t type , char* hash){
+	char* result = (char*)malloc(1); // Inicializo el resultado como un string vacio
+	result[0] = '\0'; // Aseguro que sea un string vacio
+	string_proc_node* current_node = list->first;
+	while(current_node != NULL){
+		if(current_node->type == type){
+			char* new_result = str_concat(result, current_node->hash);
+			free(result); // Libero el string anterior
+			result = new_result; // Actualizo el resultado
+		}
+		current_node = current_node->next;
+	}
+	return result;
 }
 
 
