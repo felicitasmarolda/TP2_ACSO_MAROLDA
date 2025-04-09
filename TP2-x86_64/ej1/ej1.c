@@ -41,6 +41,7 @@ void string_proc_list_add_node(string_proc_list* list, uint8_t type, char* hash)
 }
 
 char* string_proc_list_concat(string_proc_list* list, uint8_t type , char* hash){
+
 	char* result = (char*)malloc(1); // Inicializo el resultado como un string vacio
 	result[0] = '\0'; // Aseguro que sea un string vacio
 	string_proc_node* current_node = list->first;
@@ -51,6 +52,11 @@ char* string_proc_list_concat(string_proc_list* list, uint8_t type , char* hash)
 			result = new_result; // Actualizo el resultado
 		}
 		current_node = current_node->next;
+	}
+	if (result == NULL){
+		char* new_result = str_concat(result, hash);
+		free(result); // Libero el string anterior
+		result = new_result; // Actualizo el resultado
 	}
 	return result;
 }
