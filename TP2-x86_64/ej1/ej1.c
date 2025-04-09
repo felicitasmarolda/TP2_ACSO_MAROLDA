@@ -1,4 +1,5 @@
 #include "ej1.h"
+#include <string.h>
 
 string_proc_list* string_proc_list_create(void){
 	string_proc_list* list = (string_proc_list*)malloc(sizeof(string_proc_list));
@@ -39,6 +40,7 @@ void string_proc_list_add_node(string_proc_list* list, uint8_t type, char* hash)
 		list->last = node;
 	}
 }
+
 
 char* string_proc_list_concat(string_proc_list* list, uint8_t type , char* hash){
 
