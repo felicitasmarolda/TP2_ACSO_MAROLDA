@@ -42,26 +42,24 @@ void string_proc_list_add_node(string_proc_list* list, uint8_t type, char* hash)
 }
 
 
-char* string_proc_list_concat(string_proc_list* list, uint8_t type , char* hash){
+char* string_proc_list_concat(string_proc_list* list, uint8_t type, char* hash) {
+	char* result = (char*)malloc(strlen(hash) + 1); // Aloco espacio para el string base
+	if (!result) return NULL; // Por si malloc falla
+	strcpy(result, hash); // Copio el hash base
 
-	char* result = (char*)malloc(1); // Inicializo el resultado como un string vacio
-	result[0] = '\0'; // Aseguro que sea un string vacio
 	string_proc_node* current_node = list->first;
-	while(current_node != NULL){
-		if(current_node->type == type){
+	while (current_node != NULL) {
+		if (current_node->type == type) {
 			char* new_result = str_concat(result, current_node->hash);
-			free(result); // Libero el string anterior
-			result = new_result; // Actualizo el resultado
+			free(result);
+			result = new_result;
 		}
 		current_node = current_node->next;
 	}
-	if (result == NULL){
-		char* new_result = str_concat(result, hash);
-		free(result); // Libero el string anterior
-		result = new_result; // Actualizo el resultado
-	}
+
 	return result;
-}
+	}
+
 
 
 /** AUX FUNCTIONS **/
