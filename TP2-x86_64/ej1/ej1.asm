@@ -20,6 +20,7 @@ extern str_concat
 
 string_proc_list_create_asm:
 
+
 string_proc_node_create_asm:
 
 string_proc_list_add_node_asm:
