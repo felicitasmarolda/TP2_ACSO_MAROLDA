@@ -1,5 +1,3 @@
-input1 --> Por la libertad, asi como por la honra, se puede y se debe aventurar la vida.
-
-input 2 --> holaa la vida es buena
-    - vimos que tiene que tener espacios
-    - en misterio se tiene que activar la flag negativa (ibamos a probar con input de números negativos)
+Por la libertad, asi como por la honra, se puede y se debe aventurar la vida.
+0 -2 -1
+consentir 7
