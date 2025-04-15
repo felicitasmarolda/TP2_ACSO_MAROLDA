@@ -3,3 +3,5 @@ fmarolda@udesa.edu.ar
 
 phase_1:
 
+En la fase 1 había un solo jump que podía resultar en la explosión de la bomba. Este saltaba si no se
+prendía la FZ.
