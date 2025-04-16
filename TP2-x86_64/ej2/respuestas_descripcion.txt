@@ -2,6 +2,25 @@ Felicitas Marolda
 fmarolda@udesa.edu.ar
 
 phase_1:
-
 En la fase 1 había un solo jump que podía resultar en la explosión de la bomba. Este saltaba si no se
-prendía la FZ.
+prendía la FZ. Es decir, el input tenía que ser exactamente igual al que esta en la variable rdi justo 
+antes de entrar al call.
+
+phase_2:
+En la fase 2 primero los calls iban sacando las palabras a los extremos. De acá salió que el input tenía
+que tener por lo menos 3 palabras. Cuando entró a misterio me di cuenta que tenía que recibir un edi negativo
+ahí empecé a trabajar para atrás.
+
+En phase_2 cada palabra va a guardarse en un lugar distinto, la primera en rbp, la segunda en rbx y la
+tercera en eax. Usando la parte baja, le hace xor a ebx y ebd y despues shiftea un lugar y compara con 
+la tercera palabra. Si el resultado del xor y el shift no era igual a la tercera palabra explotaba. 
+Entonces, era cuestión de encontrar 3 palabras (o números) que cumplan con esas condiciones (no olvidar
+que el último número tenía que ser negativo).
+
+phase_3:
+Lo más importante de esa fase era entender que pasaba en cuenta. Cuenta recibía una lista de largo 10784 con muchas palabras
+y realizaba sobre esta una búsqueda binaria. Es recursiva y tiene un counter que si es mayor a 11 explota. Por el primer cmp
+de la fase 3 el input tenía que tener dos palabras. Hice una búsqueda binaria 7 veces (podía ser más pero tenía que estar 
+entre 6 y 11) y encontré un índice. Con el debugger encontré que palabra estaba en ese índice. Entonces, el input para que no
+explote la bomba podía ser cualquier palabra en la lista que yo pueda acceder a su índice con más de 6 y enos de 11
+comparaciones con búsqueda binaria.
