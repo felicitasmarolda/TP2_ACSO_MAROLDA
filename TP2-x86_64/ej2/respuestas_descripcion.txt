@@ -24,3 +24,14 @@ de la fase 3 el input tenía que tener dos palabras. Hice una búsqueda binaria 
 entre 6 y 11) y encontré un índice. Con el debugger encontré que palabra estaba en ese índice. Entonces, el input para que no
 explote la bomba podía ser cualquier palabra en la lista que yo pueda acceder a su índice con más de 6 y enos de 11
 comparaciones con búsqueda binaria.
+
+phase_4:
+Esta fase, al igual que la anterior, necesitaba 2 palabras para no explotar. Despues, se quedaba solo con los 4 bits más bajos
+de la primera palabra y explotaba si era exactamente 0xf, por lo tanto, la primera palabra tenía que tener sus 4 bits más
+bajos, entre 0 y 0xe pero no 0xf (explota). En esta fase, hay un ciclo que recorre un array.0 y usa el primer número (el que 
+era menor a 0xf) como índice y agarra lo que esta ahí y lo guarda en ecx. El que agarró lo usa como índice para el próximo y 
+así sucesivamente hasta que encuentre un 0xf. La idea era que tarde exactamente 14 búsquedas de (pongo indice busco num, 
+pongo índice, busco num, etc). Además, en el ciclo, va sumando todos los valores que va obteniendo del array. Acá aparece el 
+segundo número, tiene que ser la suma de los 13 valores que fue agarrando del array. Para ver que poner, justo antes del lea 
+rsi,[rip+0xcbcb8], veo el array, encuentro el 15 y mirando los números vuelvo 14 veces para atrás hasta encontrar el primer 
+número y despues sumo todos los valores por los que pasé para encontrar el segundo.
